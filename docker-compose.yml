@@ -1,0 +1,12 @@
+version: "1"
+services:
+  selenium:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - 4444:4444
+      - 5900:5900
+  app:
+    build: .
+    environment:
+      SELENIUM_URL: http://selenium:4444/wd/hub
+    tty: true

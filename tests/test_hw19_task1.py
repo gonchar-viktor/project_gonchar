@@ -21,6 +21,6 @@ class TestKFC:
         locator_the_cross.click()
         time.sleep(1)  # даю время банеру закрыться для скриншота
         locator_logo = driver_chrome.find_element(By.CSS_SELECTOR, logo)
-        driver_chrome.save_screenshot('/tests/logo_displayed.jpg')
+        driver_chrome.save_screenshot('../tests/logo_displayed_hw19.jpg')
 
         assert EC.visibility_of(locator_logo)
