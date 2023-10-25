@@ -65,7 +65,6 @@ def click_element(driver, locator):
     driver.find_element(*locator).click()
 
 
-
 def fill(driver, locator, text):
     element = driver.find_element(*locator)
     element.clear()
