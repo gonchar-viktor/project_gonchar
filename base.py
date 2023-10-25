@@ -4,26 +4,28 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 
 
-def wait_for_clicable_css(driver, locator):
+def wait_for_clicable(driver, locator):
     """
-    f
+    Waiting until the element becomes clickable otherwise an error will
+    be caused
     """
     try:
         return WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, locator)))
+            EC.element_to_be_clickable(locator))
     except WebDriverException:
         assert False, f"Element {locator} not clicable"
 
 
-def wait_for_clicable_xpath(driver, locator):
+def wait_for_element_displayed(driver, locator):
     """
-    f
+    Waiting until the element becomes visible, otherwise an error will be
+    caused
     """
     try:
         return WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, locator)))
+            EC.visibility_of_element_located(locator))
     except WebDriverException:
-        assert False, f"Element {locator} not clicable"
+        assert False, f"Element {locator} not displayed"
 
 
 def add_cookie(driver, name, value):
@@ -37,7 +39,7 @@ def delete_cookies(driver):
 
 
 def find_element_func(driver, locator):
-    element = driver.find_element(By.CSS_SELECTOR, locator)
+    element = driver.find_element(*locator)
     return element
 
 
@@ -54,14 +56,16 @@ def assert_value_in_element_attribute(driver, locator, attribute,
 
 
 def hard_click(driver, locator):
-    element = driver.find_element(By.XPATH, locator)
+    element = driver.find_element(*locator)
     driver.execute_script("arguments[0].click();", element)
 
 
+def click_element(driver, locator):
+    driver.implicitly_wait(10)
+    driver.find_element(*locator).click()
+
+
 def fill(driver, locator, text):
-    element = driver.find_element(By.CSS_SELECTOR, locator)
+    element = driver.find_element(*locator)
     element.clear()
-    element.sendKeys(text)
-    # element.sendKeys('')
-
-
+    element.send_keys(text)
