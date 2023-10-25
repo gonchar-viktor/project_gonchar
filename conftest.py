@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
@@ -10,7 +11,7 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 WAIT_TIME = 10
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope='function')
 def driver_chrome():
 
     print("\n....start chrome browser for test....")
@@ -52,6 +53,3 @@ def driver_safari():
     print("\n....quit safari browser for test....")
     driver.close()
     driver.quit()
-
-
-
